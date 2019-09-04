@@ -11,7 +11,7 @@
 -   `npm run dev`
 -   open http://localhost:4000/query
 
-Possible query:
+Example queries:
 
 ```graphql
 {
