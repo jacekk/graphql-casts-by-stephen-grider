@@ -89,8 +89,8 @@ const RootMutationType = new GraphQLObjectType({
 				companyId: { type: GraphQLInt },
 			},
 			resolve: async (src, args) => {
-				const { name, username } = args
-				const body = { name, username }
+				const { name, username, companyId } = args
+				const body = { name, username, companyId }
 				const opts = { body, json: true }
 				const resp = await got.post(routeToUrl('users'), opts)
 
