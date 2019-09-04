@@ -1,7 +1,5 @@
+const got = require('got')
 const graphql = require('graphql')
-const { find } = require('lodash')
-
-const usersDb = require('./data/db.json')
 
 const { GraphQLObjectType, GraphQLString, GraphQLInt, GraphQLSchema } = graphql
 
@@ -28,8 +26,11 @@ const RootQueryType = new GraphQLObjectType({
 			args: {
 				id: { type: GraphQLInt },
 			},
-			resolve(src, args) {
-				return find(usersDb, { id: args.id })
+			resolve: async (src, args) => {
+				const url = `http://localhost:3000/users/${args.id}`
+				const resp = await got.get(url, { json: true })
+
+				return resp.body
 			},
 		},
 	},
