@@ -1,13 +1,24 @@
 const got = require('got')
 const graphql = require('graphql')
 
-const { GraphQLObjectType, GraphQLString, GraphQLInt, GraphQLSchema } = graphql
+const {
+	GraphQLInt,
+	GraphQLList,
+	GraphQLObjectType,
+	GraphQLSchema,
+	GraphQLString,
+} = graphql
 
-const routeToUrl = (route) => `http://localhost:3000/${route}`
+const getRoute = (route) => {
+	const url = `http://localhost:3000/${route}`
+	const respBody = (resp) => resp.body
+
+	return got.get(url, { json: true }).then(respBody)
+}
 
 const CompanyType = new GraphQLObjectType({
 	name: 'Company',
-	fields: {
+	fields: () => ({
 		id: {
 			type: GraphQLInt,
 		},
@@ -20,12 +31,16 @@ const CompanyType = new GraphQLObjectType({
 		market: {
 			type: GraphQLString,
 		},
-	},
+		users: {
+			type: new GraphQLList(UserType),
+			resolve: (src, args) => getRoute(`companies/${src.id}/users`),
+		},
+	}),
 })
 
 const UserType = new GraphQLObjectType({
 	name: 'User',
-	fields: {
+	fields: () => ({
 		id: {
 			type: GraphQLInt,
 		},
@@ -37,32 +52,27 @@ const UserType = new GraphQLObjectType({
 		},
 		company: {
 			type: CompanyType,
-			resolve: async (src, args) => {
-				const url = routeToUrl(`companies/${src.companyId}`)
-				const resp = await got.get(url, { json: true })
-
-				return resp.body
-			},
+			resolve: (src, args) => getRoute(`companies/${src.companyId}`),
 		},
-	},
+	}),
 })
 
 const RootQueryType = new GraphQLObjectType({
 	name: 'RootQuery',
-	fields: {
+	fields: () => ({
 		user: {
 			type: UserType,
 			args: {
 				id: { type: GraphQLInt },
 			},
-			resolve: async (src, args) => {
-				const url = routeToUrl(`users/${args.id}`)
-				const resp = await got.get(url, { json: true })
-
-				return resp.body
-			},
+			resolve: (src, args) => getRoute(`users/${args.id}`),
 		},
-	},
+		company: {
+			type: CompanyType,
+			args: { id: { type: GraphQLInt } },
+			resolve: (src, args) => getRoute(`companies/${args.id}`),
+		},
+	}),
 })
 
 module.exports.schema = new GraphQLSchema({
