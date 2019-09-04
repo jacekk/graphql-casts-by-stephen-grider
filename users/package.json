@@ -5,7 +5,7 @@
 	"license": "MIT",
 	"scripts": {
 		"dev": "nodemon server.js",
-		"json:server": "json-server --watch data/db.json"
+		"json:server": "cp data/db.dist.json data/db.json && json-server --watch data/db.json"
 	},
 	"dependencies": {
 		"express": "^4.17.1",
