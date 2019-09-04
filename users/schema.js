@@ -97,6 +97,19 @@ const RootMutationType = new GraphQLObjectType({
 				return resp.body
 			},
 		},
+		deleteUser: {
+			type: UserType,
+			args: {
+				id: { type: new GraphQLNonNull(GraphQLInt) },
+			},
+			resolve: async (src, args) => {
+				const { id } = args
+				const url = routeToUrl(`users/${id}`)
+				await got.delete(url, { json: true })
+
+				return { id }
+			},
+		},
 	},
 })
 
