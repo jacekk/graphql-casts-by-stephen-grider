@@ -1,14 +1,7 @@
 const got = require('got')
 const graphql = require('graphql')
 
-const {
-	GraphQLInt,
-	GraphQLList,
-	GraphQLNonNull,
-	GraphQLObjectType,
-	GraphQLSchema,
-	GraphQLString,
-} = graphql
+const { GraphQLInt, GraphQLList, GraphQLNonNull, GraphQLObjectType, GraphQLSchema, GraphQLString } = graphql
 
 const routeToUrl = (route) => `http://localhost:3000/${route}`
 
@@ -63,6 +56,10 @@ const UserType = new GraphQLObjectType({
 const RootQueryType = new GraphQLObjectType({
 	name: 'RootQuery',
 	fields: () => ({
+		users: {
+			type: new GraphQLList(UserType),
+			resolve: (src, args) => getRoute('users'),
+		},
 		user: {
 			type: UserType,
 			args: {
