@@ -3,9 +3,9 @@
 -   https://www.udemy.com/graphql-with-react-course/
 -   https://github.com/StephenGrider/GraphQLCasts
 
-### Users
+### Users server
 
--   `cd users`
+-   `cd users-server`
 -   `yarn`
 -   `npm run json:server`
 -   `npm run dev`
@@ -41,3 +41,10 @@ fragment companyDetails on Company {
 	catchPhrase
 }
 ```
+
+### Users client
+
+-   `cd users-client`
+-   `yarn`
+-   `npm run dev`
+-   open http://localhost:1234
