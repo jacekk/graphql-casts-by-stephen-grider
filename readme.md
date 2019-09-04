@@ -9,7 +9,7 @@
 -   `yarn`
 -   `npm run json:server`
 -   `npm run dev`
--   open http://localhost:4000/query
+-   open http://localhost:4000/graphql
 
 Example queries:
 
