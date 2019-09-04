@@ -84,15 +84,32 @@ const RootMutationType = new GraphQLObjectType({
 		addUser: {
 			type: UserType,
 			args: {
+				companyId: { type: GraphQLInt },
 				name: { type: new GraphQLNonNull(GraphQLString) },
 				username: { type: new GraphQLNonNull(GraphQLString) },
-				companyId: { type: GraphQLInt },
 			},
 			resolve: async (src, args) => {
 				const { name, username, companyId } = args
 				const body = { name, username, companyId }
 				const opts = { body, json: true }
 				const resp = await got.post(routeToUrl('users'), opts)
+
+				return resp.body
+			},
+		},
+		editUser: {
+			type: UserType,
+			args: {
+				companyId: { type: GraphQLInt },
+				id: { type: new GraphQLNonNull(GraphQLInt) },
+				name: { type: GraphQLString },
+				username: { type: GraphQLString },
+			},
+			resolve: async (src, args) => {
+				const { name, username, companyId, id } = args
+				const body = { name, username, companyId }
+				const opts = { body, json: true }
+				const resp = await got.patch(routeToUrl(`users/${id}`), opts)
 
 				return resp.body
 			},
