@@ -18,7 +18,11 @@ export const App = () => (
 	<ApolloProvider client={client}>
 		<div>
 			<header>
-				<img className="app-logo" src="https://via.placeholder.com/100x100?text=clients" alt="logo" />
+				<img
+					alt="logo"
+					className="app-logo"
+					src="https://placeholder.com/wp-content/uploads/2018/10/placeholder.com-logo3.png"
+				/>
 				<nav className="app-menu">
 					<Link to="/">Clients list</Link>
 					<Link to="/add">Add new client</Link>
