@@ -1,23 +1,7 @@
-import gql from 'graphql-tag'
 import { graphql } from 'react-apollo'
+
+import { fetchUsersQuery } from '../../queries/users'
 
 import { Home } from './Home'
 
-const query = gql`
-	{
-		users {
-			id
-			name
-		}
-	}
-`
-
-const mutation = gql`
-	mutation DeleteUser($id: ID) {
-		deleteUser(id: $id) {
-			id
-		}
-	}
-`
-
-export const HomePage = graphql(mutation)(graphql(query)(Home))
+export const HomePage = graphql(fetchUsersQuery)(Home)

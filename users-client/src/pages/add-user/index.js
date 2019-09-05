@@ -1,15 +1,7 @@
-import gql from 'graphql-tag'
 import { graphql } from 'react-apollo'
+
+import { addUserMutation } from '../../queries/users'
 
 import { AddUser } from './AddUser'
 
-const mutation = gql`
-	mutation AddUser($name: String) {
-		addUser(name: $name) {
-			id
-			name
-		}
-	}
-`
-
-export const AddUserPage = graphql(mutation)(AddUser)
+export const AddUserPage = graphql(addUserMutation)(AddUser)

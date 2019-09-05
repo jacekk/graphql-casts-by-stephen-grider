@@ -1,4 +1,13 @@
 import React from 'react'
+import { navigate } from '@reach/router'
+
+import { fetchUsersQuery } from '../queries/users'
+
+const INPUT_PROPS = {
+	autoComplete: 'off',
+	className: 'form-control',
+	type: 'text',
+}
 
 export class UserCreationForm extends React.Component {
 	state = {
@@ -21,7 +30,17 @@ export class UserCreationForm extends React.Component {
 
 	onFormSubmit = (ev) => {
 		ev.preventDefault()
-		console.log('onFormSubmit', this.state)
+
+		this.props
+			.addUser({
+				variables: this.state,
+				refetchQueries: [{ query: fetchUsersQuery }],
+			})
+			.then(() => {
+				setTimeout(() => {
+					navigate('/')
+				}, 10e3)
+			})
 	}
 
 	render() {
@@ -29,37 +48,34 @@ export class UserCreationForm extends React.Component {
 			<form onSubmit={this.onFormSubmit}>
 				<div className="form-group">
 					<input
-						className="form-control"
+						{...INPUT_PROPS}
 						name="name"
 						onChange={this.onInputChange}
 						placeholder="Name"
-						type="text"
 						value={this.state.name}
 					/>
 				</div>
 				<div className="form-group">
 					<input
-						className="form-control"
+						{...INPUT_PROPS}
 						name="username"
 						onChange={this.onInputChange}
 						placeholder="Username"
-						type="text"
 						value={this.state.username}
 					/>
 				</div>
 				<div className="form-group">
 					<input
-						className="form-control"
+						{...INPUT_PROPS}
 						name="phone"
 						onChange={this.onInputChange}
 						placeholder="Phone"
-						type="text"
 						value={this.state.phone}
 					/>
 				</div>
 				<div className="form-group">
 					<input
-						className="form-control"
+						{...INPUT_PROPS}
 						name="website"
 						onChange={this.onInputChange}
 						placeholder="Website"
@@ -69,7 +85,7 @@ export class UserCreationForm extends React.Component {
 				</div>
 				<div className="form-group">
 					<input
-						className="form-control"
+						{...INPUT_PROPS}
 						name="email"
 						onChange={this.onInputChange}
 						placeholder="E-mail"

@@ -6,7 +6,7 @@ export const AddUser = (props) => {
 	return (
 		<div>
 			<h3>User creation</h3>
-			<UserCreationForm />
+			<UserCreationForm addUser={props.mutate} />
 		</div>
 	)
 }
