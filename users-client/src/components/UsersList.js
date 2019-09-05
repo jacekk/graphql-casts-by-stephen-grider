@@ -1,12 +1,11 @@
 import React from 'react'
 
 export const UsersList = (props) => (
-	<ol>
+	<ul className="list-group">
 		{props.users.map((user) => (
-			<li key={user.id}>
-				{' '}
-				| {user.id} | {user.name}
+			<li key={user.id} className="list-group-item">
+				{user.id} | {user.name}
 			</li>
 		))}
-	</ol>
+	</ul>
 )

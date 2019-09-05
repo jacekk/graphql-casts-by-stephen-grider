@@ -8,10 +8,6 @@ const query = gql`
 		users {
 			id
 			name
-			company {
-				id
-				name
-			}
 		}
 	}
 `

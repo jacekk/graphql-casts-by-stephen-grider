@@ -17,19 +17,31 @@ const client = new ApolloClient({ cache, link })
 export const App = () => (
 	<ApolloProvider client={client}>
 		<div>
-			<header>
-				<img
-					alt="logo"
-					className="app-logo"
-					src="https://placeholder.com/wp-content/uploads/2018/10/placeholder.com-logo3.png"
-				/>
-				<nav className="app-menu">
-					<Link to="/">Clients list</Link>
-					<Link to="/add">Add new client</Link>
-				</nav>
-			</header>
-			<main className="app-main">
-				<Routes />
+			<nav className="navbar navbar-dark bg-primary navbar-expand-lg">
+				<Link className="navbar-brand" to="/">
+					<img
+						alt="logo"
+						className="app-logo"
+						src="https://placeholder.com/wp-content/uploads/2018/10/placeholder.com-logo3.png"
+					/>
+				</Link>
+				<ul className="navbar-nav ml-auto">
+					<li className="nav-item">
+						<Link className="nav-link" to="/">
+							Clients list
+						</Link>
+					</li>
+					<li className="nav-item">
+						<Link className="nav-link" to="/add">
+							Add new client
+						</Link>
+					</li>
+				</ul>
+			</nav>
+			<main className="container app-main">
+				<div className="row">
+					<Routes />
+				</div>
 			</main>
 		</div>
 	</ApolloProvider>
