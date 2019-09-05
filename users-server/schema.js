@@ -12,6 +12,39 @@ const getRoute = (route) => {
 	return got.get(url, { json: true }).then(respBody)
 }
 
+const GeoType = new GraphQLObjectType({
+	name: 'Geo',
+	fields: () => ({
+		lat: {
+			type: GraphQLString,
+		},
+		lng: {
+			type: GraphQLString,
+		},
+	}),
+})
+
+const AddressType = new GraphQLObjectType({
+	name: 'Address',
+	fields: () => ({
+		street: {
+			type: GraphQLString,
+		},
+		suite: {
+			type: GraphQLString,
+		},
+		city: {
+			type: GraphQLString,
+		},
+		zipcode: {
+			type: GraphQLString,
+		},
+		geo: {
+			type: GeoType,
+		},
+	}),
+})
+
 const CompanyType = new GraphQLObjectType({
 	name: 'Company',
 	fields: () => ({
@@ -45,6 +78,18 @@ const UserType = new GraphQLObjectType({
 		},
 		username: {
 			type: GraphQLString,
+		},
+		email: {
+			type: GraphQLString,
+		},
+		phone: {
+			type: GraphQLString,
+		},
+		website: {
+			type: GraphQLString,
+		},
+		address: {
+			type: AddressType,
 		},
 		company: {
 			type: CompanyType,
