@@ -16,7 +16,7 @@ const client = new ApolloClient({ cache, link })
 
 export const App = () => (
 	<ApolloProvider client={client}>
-		<div>
+		<div className="app-wrapper">
 			<nav className="navbar navbar-dark bg-primary navbar-expand-lg">
 				<Link className="navbar-brand" to="/">
 					<img
@@ -39,9 +39,7 @@ export const App = () => (
 				</ul>
 			</nav>
 			<main className="container app-main">
-				<div className="row">
-					<Routes />
-				</div>
+				<Routes />
 			</main>
 		</div>
 	</ApolloProvider>
