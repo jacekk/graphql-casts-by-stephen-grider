@@ -9,7 +9,16 @@ export const UsersList = (props) => (
 				<span className="users-list__list-item-details d-flex align-items-center">
 					{user.id} | {user.name}
 				</span>
-				<button type="button" class="btn btn-danger btn-sm" onClick={props.onRemoveClick}>
+				<button
+					type="button"
+					className="btn btn-danger btn-sm"
+					onClick={(ev) => {
+						const variables = { id: user.id }
+
+						ev.preventDefault()
+						props.removeUserMutate({ variables })
+					}}
+				>
 					✖
 				</button>
 			</li>

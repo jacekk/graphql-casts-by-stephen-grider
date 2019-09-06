@@ -1,8 +1,6 @@
 import React from 'react'
 import { navigate } from '@reach/router'
 
-import { fetchUsersQuery } from '../queries/users'
-
 const INPUT_PROPS = {
 	autoComplete: 'off',
 	className: 'form-control',
@@ -32,14 +30,13 @@ export class UserCreationForm extends React.Component {
 		ev.preventDefault()
 
 		this.props
-			.addUser({
-				variables: this.state,
-				refetchQueries: [{ query: fetchUsersQuery }],
+			.addUser({ variables: this.state })
+			.then((data) => {
+				console.log('addUser success', data)
+				navigate('/')
 			})
-			.then(() => {
-				setTimeout(() => {
-					navigate('/')
-				}, 10e3)
+			.catch((err) => {
+				console.error('addUser error', err)
 			})
 	}
 

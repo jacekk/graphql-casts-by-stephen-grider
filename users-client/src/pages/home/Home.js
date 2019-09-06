@@ -12,8 +12,8 @@ export const Home = (props) => {
 	if (props.data.error) {
 		return <Alert type="danger" msg={props.data.error} />
 	}
-	if (Array.isArray(props.data.users)) {
-		return <UsersList users={props.data.users} />
+	if (Array.isArray(props.data.users) && props.data.users.length) {
+		return <UsersList users={props.data.users} removeUserMutate={props.mutate} />
 	}
 
 	return <span>No users yet :(</span>
