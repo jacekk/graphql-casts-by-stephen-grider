@@ -14,7 +14,7 @@ const onGetSuccess = (resp) => {
 const onGetError = (err) => {
 	console.error('onGetError', err)
 
-	return err
+	throw err
 }
 
 const getRoute = (route) => {
@@ -192,6 +192,26 @@ const RootMutationType = new GraphQLObjectType({
 				await got.delete(url, { json: true })
 
 				return { id }
+			},
+		},
+		setUserCompany: {
+			type: UserType,
+			args: {
+				userId: { type: new GraphQLNonNull(GraphQLInt) },
+				companyId: { type: new GraphQLNonNull(GraphQLInt) },
+			},
+			resolve: async (src, args) => {
+				const { userId, companyId } = args
+
+				// those two below to verify whether both entities exist
+				const user = await getRoute(`users/${userId}`)
+				const company = await getRoute(`companies/${companyId}`)
+
+				const body = { companyId: company.id }
+				const opts = { body, json: true }
+				const resp = await got.patch(routeToUrl(`users/${user.id}`), opts)
+
+				return resp.body
 			},
 		},
 	},
