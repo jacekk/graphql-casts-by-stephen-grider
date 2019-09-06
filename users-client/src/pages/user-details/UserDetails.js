@@ -18,12 +18,12 @@ export const UserDetails = (props) => {
 		<div className="card user-details__card">
 			<div className="card-body">
 				<h5 className="card-title">{user.name}</h5>
-				<h6 className="card-subtitle mb-4 text-muted">ID: {user.id}</h6>
-				<ul class="list-group list-group-flush">
-					<li class="list-group-item">
+				<h6 className="card-subtitle mb-3 text-muted">ID: {user.id}</h6>
+				<ul className="list-group list-group-flush">
+					<li className="list-group-item">
 						Username: <b>{user.username}</b>
 					</li>
-					<li class="list-group-item">
+					<li className="list-group-item">
 						Typename: <b>{user.__typename}</b>
 					</li>
 				</ul>
