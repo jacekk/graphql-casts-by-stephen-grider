@@ -1,5 +1,4 @@
 import React from 'react'
-import { navigate } from '@reach/router'
 
 const INPUT_PROPS = {
 	autoComplete: 'off',

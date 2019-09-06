@@ -22,7 +22,7 @@ export const UsersList = (props) => (
 						props.removeUserMutate({ variables })
 					}}
 				>
-					✖
+					<i className="far fa-trash-alt"></i>
 				</button>
 			</li>
 		))}

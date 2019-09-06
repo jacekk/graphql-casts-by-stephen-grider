@@ -10,3 +10,16 @@ export const fetchCompaniesQuery = gql`
 		}
 	}
 `
+
+export const setUserCompanyMutation = gql`
+	mutation setUserCompany($userId: Int!, $companyId: Int) {
+		setUserCompany(userId: $userId, companyId: $companyId) {
+			id
+			name
+			company {
+				id
+				name
+			}
+		}
+	}
+`

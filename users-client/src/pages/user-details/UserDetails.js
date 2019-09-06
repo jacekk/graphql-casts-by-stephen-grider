@@ -21,8 +21,12 @@ export const UserDetails = (props) => {
 	}
 
 	const onCompanySave = () => {
+		const variables = {
+			companyId: companyId ? +companyId : null,
+			userId: user.id,
+		}
 		setEditMode(false)
-		console.log('onCompanySave', companyId)
+		props.mutate({ variables })
 	}
 
 	return (

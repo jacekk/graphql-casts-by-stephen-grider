@@ -198,16 +198,19 @@ const RootMutationType = new GraphQLObjectType({
 			type: UserType,
 			args: {
 				userId: { type: new GraphQLNonNull(GraphQLInt) },
-				companyId: { type: new GraphQLNonNull(GraphQLInt) },
+				companyId: { type: GraphQLInt },
 			},
 			resolve: async (src, args) => {
 				const { userId, companyId } = args
 
-				// those two below to verify whether both entities exist
 				const user = await getRoute(`users/${userId}`)
-				const company = await getRoute(`companies/${companyId}`)
+				const body = { companyId: null }
 
-				const body = { companyId: company.id }
+				if (companyId) {
+					const company = await getRoute(`companies/${companyId}`)
+					body.companyId = company.id
+				}
+
 				const opts = { body, json: true }
 				const resp = await got.patch(routeToUrl(`users/${user.id}`), opts)
 

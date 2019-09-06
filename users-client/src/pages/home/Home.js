@@ -18,5 +18,5 @@ export const Home = (props) => {
 		return <UsersList users={users} removeUserMutate={props.mutate} />
 	}
 
-	return <span>No users yet :(</span>
+	return <div>No users yet :(</div>
 }
