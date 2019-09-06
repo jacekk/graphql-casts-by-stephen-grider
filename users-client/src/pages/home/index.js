@@ -9,12 +9,10 @@ export const HomePage = flowRight(
 	withApollo,
 	graphql(fetchUsersQuery),
 	graphql(deleteUserMutation, {
-		options: {
-			// @todo sometimes fails with:
-			// OPTIONS http://localhost:4000/graphql net::ERR_CONNECTION_REFUSED
+		options: () => ({
 			awaitRefetchQueries: true,
 			delayQuery: true,
 			refetchQueries: [{ query: fetchUsersQuery }],
-		},
+		}),
 	})
 )(Home)

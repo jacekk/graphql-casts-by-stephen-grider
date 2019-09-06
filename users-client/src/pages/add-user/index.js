@@ -8,12 +8,10 @@ import { AddUser } from './AddUser'
 export const AddUserPage = flowRight(
 	withApollo,
 	graphql(addUserMutation, {
-		options: {
-			// @todo sometimes fails with:
-			// OPTIONS http://localhost:4000/graphql net::ERR_CONNECTION_REFUSED
+		options: () => ({
 			awaitRefetchQueries: true,
 			delayQuery: true,
-			refetchQueries: () => [{ query: fetchUsersQuery, fetchPolicy: 'network-only' }],
-		},
+			refetchQueries: () => [{ query: fetchUsersQuery }],
+		}),
 	})
 )(AddUser)
