@@ -6,9 +6,8 @@
 ### Users server
 
 -   `cd users-server`
--   `yarn`
--   `npm run json:server`
--   `npm run dev`
+-   `yarn install`
+-   `yarn dev`
 -   open http://localhost:4000/graphql
 
 Example queries:
@@ -45,6 +44,6 @@ fragment companyDetails on Company {
 ### Users client
 
 -   `cd users-client`
--   `yarn`
--   `npm run dev`
+-   `yarn install`
+-   `yarn dev`
 -   open http://localhost:1234
