@@ -28,16 +28,7 @@ export class UserCreationForm extends React.Component {
 
 	onFormSubmit = (ev) => {
 		ev.preventDefault()
-
-		this.props
-			.addUser({ variables: this.state })
-			.then((data) => {
-				console.log('addUser success', data)
-				navigate('/')
-			})
-			.catch((err) => {
-				console.error('addUser error', err)
-			})
+		this.props.onSubmit(this.state)
 	}
 
 	render() {
