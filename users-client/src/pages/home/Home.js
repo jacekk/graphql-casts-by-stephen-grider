@@ -9,7 +9,7 @@ export const Home = (props) => {
 	const { loading, error, users } = props.data
 
 	if (loading) {
-		return <Alert type="info" msg="loading users data..." />
+		return <Alert type="light" msg="loading users data..." />
 	}
 	if (error) {
 		return <Alert type="danger" msg={error} />

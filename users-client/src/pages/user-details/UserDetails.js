@@ -8,7 +8,7 @@ export const UserDetails = (props) => {
 	const { error, user, loading } = props.data
 
 	if (loading) {
-		return <Alert type="info" msg="loading user data..." />
+		return <Alert type="light" msg="loading user data..." />
 	}
 	if (error) {
 		return <Alert type="danger" msg={error} />
@@ -18,19 +18,24 @@ export const UserDetails = (props) => {
 	}
 
 	return (
-		<div className="card user-details__card">
-			<div className="card-body">
-				<h5 className="card-title">{user.name}</h5>
-				<h6 className="card-subtitle mb-3 text-muted">ID: {user.id}</h6>
-				<ul className="list-group list-group-flush">
-					<li className="list-group-item">
-						Username: <b>{user.username}</b>
-					</li>
-					<li className="list-group-item">
-						Typename: <b>{user.__typename}</b>
-					</li>
-				</ul>
+		<div className="user-details__wrapper">
+			<div className="card user-details__card">
+				<div className="card-body">
+					<h5 className="card-title">{user.name}</h5>
+					<h6 className="card-subtitle mb-3 text-muted">ID: {user.id}</h6>
+					<ul className="list-group list-group-flush">
+						<li className="list-group-item">
+							Username: <b>{user.username}</b>
+						</li>
+						{/* @todo add more props here */}
+						{/* @todo remove typename below */}
+						<li className="list-group-item">
+							Typename: <b>{user.__typename}</b>
+						</li>
+					</ul>
+				</div>
 			</div>
+			{/* @todo add some form in here */}
 		</div>
 	)
 }
