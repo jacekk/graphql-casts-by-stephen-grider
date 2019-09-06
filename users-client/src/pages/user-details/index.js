@@ -16,4 +16,5 @@ export const UserDetailsPage = flowRight(
 			}
 		},
 	})
+	// @todo add 'setUserCompany' here
 )(UserDetails)

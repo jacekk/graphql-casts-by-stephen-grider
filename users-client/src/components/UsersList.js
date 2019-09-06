@@ -3,12 +3,14 @@ import { Link } from '@reach/router'
 
 import './UsersList.sass'
 
+const UserCompanyName = ({ user }) => <span className="text-muted ml-1 mr-1">{(user.company || {}).name || '-'}</span>
+
 export const UsersList = (props) => (
 	<ul className="list-group users-list__wrapper">
 		{props.users.map((user) => (
 			<li key={user.id} className="list-group-item d-flex justify-content-between">
 				<Link className="users-list__list-item-details d-flex align-items-center" to={`/users/${user.id}`}>
-					{user.id} | {user.name}
+					{user.id} | <UserCompanyName user={user} /> | {user.name}
 				</Link>
 				<button
 					type="button"

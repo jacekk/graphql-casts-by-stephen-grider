@@ -5,6 +5,9 @@ export const fetchUsersQuery = gql`
 		users {
 			id
 			name
+			company {
+				name
+			}
 		}
 	}
 `
@@ -15,6 +18,10 @@ export const fetchUserQuery = gql`
 			id
 			name
 			username
+			company {
+				id
+				name
+			}
 		}
 	}
 `

@@ -109,7 +109,12 @@ const UserType = new GraphQLObjectType({
 		},
 		company: {
 			type: CompanyType,
-			resolve: (src, args) => getRoute(`companies/${src.companyId}`),
+			resolve: (src, args) => {
+				if (!src.companyId) {
+					return null
+				}
+				return getRoute(`companies/${src.companyId}`)
+			},
 		},
 	}),
 })
@@ -127,6 +132,10 @@ const RootQueryType = new GraphQLObjectType({
 				id: { type: GraphQLInt },
 			},
 			resolve: (src, args) => getRoute(`users/${args.id}`),
+		},
+		companies: {
+			type: new GraphQLList(CompanyType),
+			resolve: (src, args) => getRoute('companies'),
 		},
 		company: {
 			type: CompanyType,
