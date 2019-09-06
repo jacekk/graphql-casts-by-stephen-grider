@@ -6,14 +6,16 @@ import { UsersList } from '../../components/UsersList'
 import './Home.sass'
 
 export const Home = (props) => {
-	if (props.data.loading) {
-		return <span>loading users data ...</span>
+	const { loading, error, users } = props.data
+
+	if (loading) {
+		return <Alert type="info" msg="loading users data..." />
 	}
-	if (props.data.error) {
-		return <Alert type="danger" msg={props.data.error} />
+	if (error) {
+		return <Alert type="danger" msg={error} />
 	}
-	if (Array.isArray(props.data.users) && props.data.users.length) {
-		return <UsersList users={props.data.users} removeUserMutate={props.mutate} />
+	if (Array.isArray(users) && users.length) {
+		return <UsersList users={users} removeUserMutate={props.mutate} />
 	}
 
 	return <span>No users yet :(</span>

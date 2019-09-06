@@ -5,8 +5,11 @@ import { Alert } from '../../components/Alert'
 import './UserDetails.sass'
 
 export const UserDetails = (props) => {
-	const { error, user } = props.data
+	const { error, user, loading } = props.data
 
+	if (loading) {
+		return <Alert type="info" msg="loading user data..." />
+	}
 	if (error) {
 		return <Alert type="danger" msg={error} />
 	}
