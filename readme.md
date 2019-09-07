@@ -3,16 +3,38 @@
 -   https://www.udemy.com/graphql-with-react-course/
 -   https://github.com/StephenGrider/GraphQLCasts
 
-### Users server
+---
+
+### Basic app | users
+
+##### Server
 
 -   `cd users-server`
 -   `yarn install`
 -   `yarn dev`
 -   open http://localhost:4000/graphql
 
-### Users client
+##### Client
 
 -   `cd users-client`
+-   `yarn install`
+-   `yarn dev`
+-   open http://localhost:1234
+
+---
+
+### Authorization
+
+##### Server
+
+-   `cd auth-server`
+-   `yarn install`
+-   `yarn dev`
+-   open http://localhost:4000/graphql
+
+##### Client
+
+-   `cd auth-client`
 -   `yarn install`
 -   `yarn dev`
 -   open http://localhost:1234

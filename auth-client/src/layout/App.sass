@@ -1,0 +1,22 @@
+.app-wrapper
+	display: flex
+	flex-direction: column
+	min-height: 100vh
+.app-logo
+	height: 50px
+	opacity: 0.5
+	transition: opacity 250ms
+	&:hover
+		opacity: 1
+.app-main
+	display: flex
+	flex-grow: 1
+	justify-content: center
+	margin: 14px auto
+	> div // @reach router wrapper
+		align-content: center
+		display: flex
+		flex-grow: 1
+		justify-content: center
+		> div
+			margin: auto
