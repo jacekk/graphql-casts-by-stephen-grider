@@ -6,7 +6,7 @@ const { GraphQLInt, GraphQLList, GraphQLNonNull, GraphQLObjectType, GraphQLSchem
 const routeToUrl = (route) => `http://localhost:3000/${route}`
 
 const onGetSuccess = (resp) => {
-	console.log('onGetSuccess', resp.url, resp.statusCode, resp.statusMessage)
+	console.debug('onGetSuccess', resp.url, resp.statusCode, resp.statusMessage)
 
 	return resp.body
 }
@@ -20,7 +20,7 @@ const onGetError = (err) => {
 const getRoute = (route) => {
 	const url = routeToUrl(route)
 	const opts = { json: true }
-	console.log('getRoute', route, url)
+	console.debug('getRoute', route, url)
 
 	return got
 		.get(url, opts)
