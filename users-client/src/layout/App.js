@@ -8,11 +8,12 @@ import React from 'react'
 import { Routes } from './Routes'
 import './App.sass'
 
+const dataIdFromObject = (o) => o.id
 const cache = new InMemoryCache()
 const link = new HttpLink({
 	uri: 'http://localhost:4000/graphql',
 })
-const client = new ApolloClient({ cache, link })
+const client = new ApolloClient({ cache, dataIdFromObject, link })
 
 export const App = () => (
 	<ApolloProvider client={client}>

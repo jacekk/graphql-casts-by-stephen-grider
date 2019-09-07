@@ -13,17 +13,5 @@ export const UserDetailsPage = flowRight(
 			variables: { id: parseInt(props.id) },
 		}),
 	}),
-	graphql(setUserCompanyMutation, {
-		options: (props) => ({
-			awaitRefetchQueries: true,
-			delayQuery: true,
-			refetchQueries: () => [
-				{
-					fetchPolicy: 'network-only',
-					query: fetchUserQuery,
-					variables: { id: parseInt(props.id) },
-				},
-			],
-		}),
-	})
+	graphql(setUserCompanyMutation)
 )(UserDetails)
