@@ -4,7 +4,7 @@
   "main": "index.js",
   "license": "MIT",
   "scripts": {
-    "dev": "npm-run-all --parallel serve:express docker:up",
+    "dev": "npm-run-all --sequential docker:up serve:express",
     "docker:stop": "docker-compose stop",
     "docker:up": "docker-compose up -d",
     "serve:express": "cross-env DEBUG=express:* nodemon server.js"
