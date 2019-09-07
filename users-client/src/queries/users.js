@@ -18,6 +18,15 @@ export const fetchUserQuery = gql`
 			id
 			name
 			username
+			email
+			phone
+			website
+			address {
+				street
+				suite
+				zipcode
+				city
+			}
 			company {
 				id
 				name

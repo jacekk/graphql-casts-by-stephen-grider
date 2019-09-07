@@ -5,6 +5,14 @@ import { UserCompanyPickerForm } from '../../components/UserCompanyPickerForm'
 
 import './UserDetails.sass'
 
+const addressToSingleLine = (address) => {
+	if (!address) {
+		return '-'
+	}
+
+	return [address.street, ' / ', address.suite, ' / ', address.zipcode, ' ', address.city].filter(Boolean).join('')
+}
+
 export const UserDetails = (props) => {
 	const [companyId, setCompanyId] = useState(user && user.company && user.company.id)
 	const [isEditMode, setEditMode] = useState(false)
@@ -39,7 +47,18 @@ export const UserDetails = (props) => {
 						<li className="list-group-item">
 							Username: <b>{user.username}</b>
 						</li>
-						{/* @todo add more props here */}
+						<li className="list-group-item">
+							Email: <b>{user.email}</b>
+						</li>
+						<li className="list-group-item">
+							Phone: <b>{user.phone}</b>
+						</li>
+						<li className="list-group-item">
+							Website: <b>{user.website}</b>
+						</li>
+						<li className="list-group-item">
+							Address: <b>{addressToSingleLine(user.address)}</b>
+						</li>
 						<li className="list-group-item d-flex align-items-center justify-content-between">
 							{!isEditMode && (
 								<>
