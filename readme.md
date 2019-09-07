@@ -32,6 +32,10 @@
 -   `yarn dev`
 -   open http://localhost:4000/graphql
 
+And after a productive day:
+
+-   `yarn docker:stop`
+
 ##### Client
 
 -   `cd auth-client`
