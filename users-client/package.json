@@ -21,6 +21,6 @@
     "react": "^16.9.0",
     "react-apollo": "^3.0.1",
     "react-dom": "^16.9.0",
-    "sass": "^1.23.0-module.beta.1"
+    "sass": "^1.23.0"
   }
 }
