@@ -15,6 +15,7 @@ const addressToSingleLine = (address) => {
 
 export const UserDetails = (props) => {
 	const [companyId, setCompanyId] = useState(user && user.company && user.company.id)
+	const [companyName, setCompanyName] = useState(null)
 	const [isEditMode, setEditMode] = useState(false)
 	const { error, user, loading } = props.data
 
@@ -28,13 +29,35 @@ export const UserDetails = (props) => {
 		return <Alert type="danger" msg="Sth went wrong. User details cannot be displayed" />
 	}
 
+	const onCompanyFormChange = (id, name) => {
+		setCompanyId(id)
+		setCompanyName(name)
+	}
+
 	const onCompanySave = () => {
+		const selectedId = companyId ? +companyId : null
 		const variables = {
-			companyId: companyId ? +companyId : null,
+			companyId: selectedId,
 			userId: user.id,
 		}
+		const optimisticResponse = {
+			__typename: 'Mutation',
+			setUserCompany: {
+				__typename: 'User',
+				company: null,
+				id: user.id,
+				name: user.name,
+			},
+		}
+		if (selectedId) {
+			optimisticResponse.setUserCompany.company = {
+				__typename: 'Company',
+				id: selectedId,
+				name: companyName,
+			}
+		}
 		setEditMode(false)
-		props.mutate({ variables })
+		props.mutate({ variables, optimisticResponse })
 	}
 
 	return (
@@ -78,10 +101,7 @@ export const UserDetails = (props) => {
 							{isEditMode && (
 								<>
 									<span>Company:</span>
-									<UserCompanyPickerForm
-										user={user}
-										onChange={(selectedId) => setCompanyId(selectedId)}
-									/>
+									<UserCompanyPickerForm user={user} onChange={onCompanyFormChange} />
 									<button className="btn btn-default btn-sm " onClick={onCompanySave} type="button">
 										<i className="fas fa-save"></i>
 									</button>

@@ -17,8 +17,9 @@ export const UserCompanyPicker = (props) => {
 
 	const onSelectChange = (ev) => {
 		const selected = ev.target.value
-		const selectedId = selected && selected.length ? selected : null
-		props.onChange(selectedId)
+		const selectedId = selected && selected.length ? +selected : null
+		const selectedItem = companies.find((item) => item.id === selectedId)
+		props.onChange(selectedId, (selectedItem || {}).name)
 	}
 
 	return (

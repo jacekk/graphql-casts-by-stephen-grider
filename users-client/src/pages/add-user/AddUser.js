@@ -8,7 +8,6 @@ export const AddUser = (props) => {
 		props
 			.mutate({ variables })
 			.then((resp) => {
-				console.log('addUser success', resp)
 				navigate('/')
 			})
 			.catch((err) => {
