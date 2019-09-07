@@ -1,11 +1,6 @@
-import { flowRight } from 'lodash'
-import { graphql, withApollo } from 'react-apollo'
 import React from 'react'
 
-import { Alert } from './Alert'
-import { fetchCompaniesQuery } from '../queries/companies'
-
-// @todo split dump and smart components somehow
+import { Alert } from '../Alert'
 
 export const UserCompanyPicker = (props) => {
 	const { loading, error, companies } = props.data
@@ -45,8 +40,3 @@ export const UserCompanyPicker = (props) => {
 		</div>
 	)
 }
-
-export const UserCompanyPickerForm = flowRight(
-	withApollo,
-	graphql(fetchCompaniesQuery)
-)(UserCompanyPicker)

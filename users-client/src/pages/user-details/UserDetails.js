@@ -1,7 +1,7 @@
 import React, { useState } from 'react'
 
 import { Alert } from '../../components/Alert'
-import { UserCompanyPickerForm } from '../../components/UserCompanyPicker'
+import { UserCompanyPickerForm } from '../../components/UserCompanyPickerForm'
 
 import './UserDetails.sass'
 
