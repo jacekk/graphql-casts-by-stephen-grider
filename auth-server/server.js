@@ -6,9 +6,10 @@ const mongoose = require('mongoose')
 const passport = require('passport')
 const session = require('express-session')
 
-const schema = require('./schema')
-
 require('dotenv').config()
+require('./models') // has to be invoked/required before any service
+
+const schema = require('./schema')
 
 const MONGOOSE_OPTIONS = { useNewUrlParser: true, useUnifiedTopology: true }
 const MongoStore = ConnectMongo(session)
