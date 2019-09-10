@@ -30,18 +30,29 @@ const GuestMenu = () => (
 	</ul>
 )
 
-const NavbarMarkup = (props) => (
-	<nav className="navbar navbar-dark bg-primary navbar-expand-lg">
-		<Link className="navbar-brand" to="/">
-			<img
-				alt="logo"
-				className="app-logo"
-				src="https://placeholder.com/wp-content/uploads/2018/10/placeholder.com-logo3.png"
-			/>
-		</Link>
-		{props.data.currentUser ? <LoggedInMenu user={props.data.currentUser} /> : <GuestMenu />}
-	</nav>
-)
+const NavbarMarkup = (props) => {
+	const { loading, error, currentUser } = props.data
+
+	if (loading) {
+		return null
+	}
+	if (error) {
+		return <Alert type="danger" msg={error} />
+	}
+
+	return (
+		<nav className="navbar navbar-dark bg-primary navbar-expand-lg">
+			<Link className="navbar-brand" to="/">
+				<img
+					alt="logo"
+					className="app-logo"
+					src="https://placeholder.com/wp-content/uploads/2018/10/placeholder.com-logo3.png"
+				/>
+			</Link>
+			{currentUser ? <LoggedInMenu user={currentUser} /> : <GuestMenu />}
+		</nav>
+	)
+}
 
 export const Navbar = flowRight(
 	withApollo,
