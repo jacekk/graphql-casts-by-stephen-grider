@@ -23,9 +23,10 @@ const RootMutationType = new GraphQLObjectType({
 		logout: {
 			type: types.UserType,
 			resolve(src, args, req) {
+				const { user } = req // note: user is reset via logout(); copy to return
 				req.logout()
 
-				return req.user
+				return user
 			},
 		},
 		login: {
