@@ -28,8 +28,13 @@ export const App = () => (
 				</Link>
 				<ul className="navbar-nav ml-auto">
 					<li className="nav-item">
-						<Link className="nav-link" to="/">
-							Home
+						<Link className="nav-link" to="/signup">
+							Sign up
+						</Link>
+					</li>
+					<li className="nav-item">
+						<Link className="nav-link" to="/login">
+							Log in
 						</Link>
 					</li>
 				</ul>
