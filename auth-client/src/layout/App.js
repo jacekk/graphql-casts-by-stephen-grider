@@ -1,10 +1,10 @@
 import { ApolloProvider } from 'react-apollo'
 import { HttpLink } from 'apollo-link-http'
 import { InMemoryCache } from 'apollo-cache-inmemory'
-import { Link } from '@reach/router'
 import ApolloClient from 'apollo-client'
 import React from 'react'
 
+import { Navbar } from './Navbar'
 import { Routes } from './Routes'
 import './App.sass'
 
@@ -18,27 +18,7 @@ const client = new ApolloClient({ cache, dataIdFromObject, link })
 export const App = () => (
 	<ApolloProvider client={client}>
 		<div className="app-wrapper">
-			<nav className="navbar navbar-dark bg-primary navbar-expand-lg">
-				<Link className="navbar-brand" to="/">
-					<img
-						alt="logo"
-						className="app-logo"
-						src="https://placeholder.com/wp-content/uploads/2018/10/placeholder.com-logo3.png"
-					/>
-				</Link>
-				<ul className="navbar-nav ml-auto">
-					<li className="nav-item">
-						<Link className="nav-link" to="/signup">
-							Sign up
-						</Link>
-					</li>
-					<li className="nav-item">
-						<Link className="nav-link" to="/login">
-							Log in
-						</Link>
-					</li>
-				</ul>
-			</nav>
+			<Navbar />
 			<main className="container app-main">
 				<Routes />
 			</main>
