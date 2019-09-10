@@ -1,5 +1,5 @@
 import { ApolloProvider } from 'react-apollo'
-import { HttpLink } from 'apollo-link-http'
+import { createHttpLink } from 'apollo-link-http'
 import { InMemoryCache } from 'apollo-cache-inmemory'
 import ApolloClient from 'apollo-client'
 import React from 'react'
@@ -10,8 +10,9 @@ import './App.sass'
 
 const dataIdFromObject = (o) => o.id
 const cache = new InMemoryCache()
-const link = new HttpLink({
+const link = createHttpLink({
 	uri: 'http://localhost:4000/graphql',
+	credentials: 'same-origin',
 })
 const client = new ApolloClient({ cache, dataIdFromObject, link })
 
