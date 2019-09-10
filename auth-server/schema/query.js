@@ -7,7 +7,7 @@ const types = require('./types')
 const RootQueryType = new GraphQLObjectType({
 	name: 'RootQuery',
 	fields: {
-		user: {
+		currentUser: {
 			type: types.UserType,
 			resolve: (src, args, req) => {
 				return req.user
