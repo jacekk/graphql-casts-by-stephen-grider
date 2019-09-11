@@ -1,3 +1,9 @@
 import React from 'react'
 
-export const Signup = () => <div>Signup page</div>
+import { AuthForm } from '../../components/AuthForm'
+
+export const Signup = (props) => (
+	<div>
+		<AuthForm title="Signup form" onSubmit={props.mutate} />
+	</div>
+)

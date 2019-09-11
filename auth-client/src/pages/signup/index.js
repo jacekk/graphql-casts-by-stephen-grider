@@ -1,6 +1,11 @@
-import { withApollo } from 'react-apollo'
 import { flowRight } from 'lodash'
+import { withApollo, graphql } from 'react-apollo'
+
+import { signupMutation } from '../../mutations/auth'
 
 import { Signup } from './Signup'
 
-export const SignupPage = flowRight(withApollo)(Signup)
+export const SignupPage = flowRight(
+	withApollo,
+	graphql(signupMutation)
+)(Signup)
