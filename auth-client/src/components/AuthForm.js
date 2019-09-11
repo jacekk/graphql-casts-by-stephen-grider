@@ -1,6 +1,8 @@
 import React, { useState } from 'react'
 import { navigate } from '@reach/router'
 
+import { Alert } from '../components/Alert'
+
 const INPUT_PROPS = {
 	autoComplete: 'off',
 	className: 'form-control',
@@ -12,6 +14,7 @@ export const AuthForm = (props) => {
 		email: '',
 		password: '',
 	})
+	const [submitError, setSubmitError] = useState(null)
 
 	const onInputChange = (ev) => {
 		const { name, value } = ev.target
@@ -23,43 +26,57 @@ export const AuthForm = (props) => {
 
 	const onFormSubmit = (ev) => {
 		ev.preventDefault()
+		setSubmitError(null)
 		props
 			.onSubmit({ variables: formValues })
 			.then((resp) => {
+				console.log('resp', resp)
 				navigate('/dashboard')
 			})
 			.catch((err) => {
+				setSubmitError(err)
 				console.error(`error in ${props.title}:`, err)
 			})
 	}
 
 	return (
-		<div>
-			<h3>{props.title}</h3>
-			<form onSubmit={onFormSubmit}>
-				<div className="form-group">
-					<input
-						{...INPUT_PROPS}
-						name="email"
-						onChange={onInputChange}
-						placeholder="Email"
-						value={formValues.email}
-					/>
+		<div className="container">
+			<div className="row justify-content-md-center">
+				<div className="col-6">
+					<form onSubmit={onFormSubmit}>
+						<h3>{props.title}</h3>
+						{submitError && (
+							<div>
+								<br />
+								<Alert type="danger" msg={submitError} />
+								<br />
+							</div>
+						)}
+						<div className="form-group">
+							<input
+								{...INPUT_PROPS}
+								name="email"
+								onChange={onInputChange}
+								placeholder="Email"
+								value={formValues.email}
+							/>
+						</div>
+						<div className="form-group">
+							<input
+								{...INPUT_PROPS}
+								name="password"
+								onChange={onInputChange}
+								placeholder="Password"
+								type="password"
+								value={formValues.password}
+							/>
+						</div>
+						<button type="submit" className="btn btn-primary">
+							Submit
+						</button>
+					</form>
 				</div>
-				<div className="form-group">
-					<input
-						{...INPUT_PROPS}
-						name="password"
-						onChange={onInputChange}
-						placeholder="Password"
-						type="password"
-						value={formValues.password}
-					/>
-				</div>
-				<button type="submit" className="btn btn-primary">
-					Submit
-				</button>
-			</form>
+			</div>
 		</div>
 	)
 }
