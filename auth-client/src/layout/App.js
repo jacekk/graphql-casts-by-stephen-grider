@@ -12,7 +12,7 @@ const dataIdFromObject = (o) => o.id
 const cache = new InMemoryCache()
 const link = createHttpLink({
 	uri: 'http://localhost:4000/graphql',
-	credentials: 'same-origin',
+	credentials: 'include',
 })
 const client = new ApolloClient({ cache, dataIdFromObject, link })
 

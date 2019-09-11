@@ -34,8 +34,12 @@ const graphQLMiddleware = expressGraphQL({
 	schema,
 	graphiql: true,
 })
+const corsOptions = {
+	credentials: true,
+	origin: true,
+}
 
-app.use(cors())
+app.use(cors(corsOptions))
 app.use(sessionMiddleware)
 app.use(passport.initialize())
 app.use(passport.session())

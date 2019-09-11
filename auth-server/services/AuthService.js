@@ -65,8 +65,11 @@ const AuthService = {
 	login: ({ email, password, req }) => {
 		return new Promise((resolve, reject) => {
 			passport.authenticate('local', (err, user) => {
+				if (err) {
+					return reject(err)
+				}
 				if (!user) {
-					reject('Invalid credentials.')
+					return reject('Invalid credentials.')
 				}
 
 				req.login(user, () => resolve(user))
