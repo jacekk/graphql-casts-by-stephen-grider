@@ -1,7 +1,8 @@
 import React, { useState } from 'react'
-import { navigate } from '@reach/router'
 
 import { Alert } from '../components/Alert'
+
+import './AuthForm.sass'
 
 const INPUT_PROPS = {
 	autoComplete: 'off',
@@ -27,22 +28,16 @@ export const AuthForm = (props) => {
 	const onFormSubmit = (ev) => {
 		ev.preventDefault()
 		setSubmitError(null)
-		props
-			.onSubmit({ variables: formValues })
-			.then((resp) => {
-				console.log('resp', resp)
-				navigate('/dashboard')
-			})
-			.catch((err) => {
-				setSubmitError(err)
-				console.error(`error in ${props.title}:`, err)
-			})
+		props.onSubmit({ variables: formValues }).catch((err) => {
+			setSubmitError(err)
+			console.error(`error in ${props.title}:`, err)
+		})
 	}
 
 	return (
-		<div className="container">
+		<div className="container auth-form__wrapper">
 			<div className="row justify-content-md-center">
-				<div className="col-6">
+				<div className="col-12">
 					<form onSubmit={onFormSubmit}>
 						<h3>{props.title}</h3>
 						{submitError && (

@@ -7,5 +7,5 @@ import { Dashboard } from './Dashboard'
 
 export const DashboardPage = flowRight(
 	withApollo,
-	graphql(currentUserQuery)
+	graphql(currentUserQuery) // @todo replace with sth else; like a list of all users
 )(Dashboard)
