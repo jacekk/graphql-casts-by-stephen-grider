@@ -1,16 +1,30 @@
 import { flowRight } from 'lodash'
-import { Link } from '@reach/router'
 import { graphql, withApollo } from 'react-apollo'
+import { Link, navigate } from '@reach/router'
 import React from 'react'
 
 import { currentUserQuery } from '../queries/user'
+import { logoutMutation } from '../mutations/auth'
 
-const LoggedInMenu = ({ user }) => (
+const LoggedInMenu = ({ user, onLogout }) => (
 	<ul className="navbar-nav ml-auto">
 		<li className="nav-item">
-			<Link className="nav-link" to="/logout">
-				Logout ({user.email})
-			</Link>
+			<a
+				href="#"
+				className="nav-link"
+				onClick={(ev) => {
+					ev.preventDefault()
+					onLogout()
+						.then(() => {
+							navigate('/')
+						})
+						.catch((err) => {
+							console.error('on logout', err)
+						})
+				}}
+			>
+				Logout ({(user || {}).email || 'no-email'})
+			</a>
 		</li>
 	</ul>
 )
@@ -49,12 +63,20 @@ const NavbarMarkup = (props) => {
 					src="https://placeholder.com/wp-content/uploads/2018/10/placeholder.com-logo3.png"
 				/>
 			</Link>
-			{currentUser ? <LoggedInMenu user={currentUser} /> : <GuestMenu />}
+			{currentUser ? <LoggedInMenu user={currentUser} onLogout={props.mutate} /> : <GuestMenu />}
 		</nav>
 	)
 }
 
 export const Navbar = flowRight(
 	withApollo,
-	graphql(currentUserQuery)
+	graphql(currentUserQuery),
+	graphql(logoutMutation, {
+		options: () => ({
+			// @todo check whether all `awaitRefetchQueries` and `delayQuery` are necessary
+			awaitRefetchQueries: true,
+			delayQuery: true,
+			refetchQueries: [{ query: currentUserQuery }],
+		}),
+	})
 )(NavbarMarkup)

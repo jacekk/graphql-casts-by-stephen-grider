@@ -11,7 +11,7 @@ export const AddUserPage = flowRight(
 		options: () => ({
 			awaitRefetchQueries: true,
 			delayQuery: true,
-			refetchQueries: () => [{ query: fetchUsersQuery }],
+			refetchQueries: [{ query: fetchUsersQuery }],
 		}),
 	})
 )(AddUser)
