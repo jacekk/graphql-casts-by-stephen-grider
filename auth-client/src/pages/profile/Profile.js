@@ -17,9 +17,12 @@ export const Profile = (props) => {
 
 	return (
 		<div>
-			<h3>Profile page</h3>
+			<h3>Your profile</h3>
 			<div>
-				Your email is: <b>{currentUser.email}</b>
+				ID: <b>{currentUser.id}</b>
+			</div>
+			<div>
+				Email: <b>{currentUser.email}</b>
 			</div>
 		</div>
 	)
