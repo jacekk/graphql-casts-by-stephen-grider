@@ -34,8 +34,12 @@ export const AuthForm = (props) => {
 				navigate('/dashboard')
 			})
 			.catch((err) => {
-				setSubmitError(err)
 				console.error(`error in ${props.title}:`, err)
+				if (Array.isArray(err.graphQLErrors) && err.graphQLErrors[0]) {
+					setSubmitError(err.graphQLErrors.map((item) => item.message).join(', '))
+				} else {
+					setSubmitError(err)
+				}
 			})
 	}
 
