@@ -34,7 +34,8 @@
 
 And after a productive day:
 
--   `yarn docker:stop`
+-   `yarn docker:stop` or
+-   `yarn docker:down` to destroy containers
 
 ##### Client
 

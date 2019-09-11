@@ -5,6 +5,7 @@
   "license": "MIT",
   "scripts": {
     "dev": "npm-run-all --sequential docker:up serve:express",
+    "docker:down": "docker-compose down -v",
     "docker:stop": "docker-compose stop",
     "docker:up": "docker-compose up -d",
     "serve:express": "cross-env DEBUG=express:* nodemon server.js"
