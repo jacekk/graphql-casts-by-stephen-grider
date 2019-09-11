@@ -22,8 +22,9 @@ mongoose.connection
 	.on('error', (err) => console.log('Error connecting to Mongo:', err))
 
 const sessionMiddleware = session({
+	// note `resave` and `saveUninitialized`: https://stackoverflow.com/a/40396102
 	resave: true,
-	saveUninitialized: true,
+	saveUninitialized: false, // to not store guests sessions: https://github.com/expressjs/session#saveuninitialized
 	secret: process.env.SESSION_SECRET,
 	store: new MongoStore({
 		url: process.env.MONGO_URI,
