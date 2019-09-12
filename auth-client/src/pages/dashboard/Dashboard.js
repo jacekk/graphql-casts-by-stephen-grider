@@ -1,26 +1,30 @@
-import { navigate } from '@reach/router'
 import React from 'react'
 
 export const Dashboard = (props) => {
-	const { currentUser, error, loading } = props.data
+	const { error, loading, allUsers } = props.data
 
 	if (loading) {
-		return null
+		return <>loading...</>
 	}
 	if (error) {
 		return <Alert type="danger" msg={error} />
 	}
-	if (!currentUser) {
-		navigate('/')
-		return null
+	if (!Array.isArray(allUsers)) {
+		return <Alert type="danger" msg="Fetched data is not valid." />
 	}
 
 	return (
 		<div>
-			<h3>Dashboard page</h3>
-			<div>
-				Your email is: <b>{currentUser.email}</b>
-			</div>
+			<h3>All signed in users:</h3>
+			<ul className="list-group users-list__wrapper">
+				{allUsers.map((user) => (
+					<li key={user.id} className="list-group-item d-flex justify-content-between">
+						{user.email}
+						&nbsp;
+						<span className="text-muted">[id: {user.id}]</span>
+					</li>
+				))}
+			</ul>
 		</div>
 	)
 }

@@ -8,3 +8,12 @@ export const currentUserQuery = gql`
 		}
 	}
 `
+
+export const allUsersQuery = gql`
+	query fetchAllUsers {
+		allUsers {
+			id
+			email
+		}
+	}
+`
